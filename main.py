@@ -27,7 +27,6 @@ def get_latest_file_number(directory):
 
 def main():
     st.title("Peak's VALORANT transcriber")
-    st.write("This is a work in progress to help creators lower their costs to produce quality content. I will continue to improve the app as a side-project over time. At the moment we're limited to 25mb files until I've built a splitter for longer clips. The audio of a 10min vid should be around 25mb.")
     
     api_key_input = st.sidebar.text_input("Enter your OpenAI API key", type="password")
     update_button = st.sidebar.button("Update API Key")
