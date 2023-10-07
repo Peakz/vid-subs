@@ -75,22 +75,27 @@ def main():
         if transcribe_button:
             try:
                 file_number = get_latest_file_number('.') + 1
-                with NamedTemporaryFile(delete=False, suffix=f"_{file_number}.mp4") as f:
+                with NamedTemporaryFile(delete=False, suffix=f"_{file_number}.{uploaded_file.type.split('/')[-1]}") as f:
                     f.write(uploaded_file.getbuffer())
-                    video_file = f.name
+                    file = f.name
 
-                audio_file = f"audio_{file_number}.mp3"
                 transcript_file = f"transcript_{file_number}.txt"
 
-                # Extract audio using moviepy
-                video = VideoFileClip(video_file)
-                audio = video.audio
-                audio.write_audiofile(audio_file)
+                if uploaded_file.name.endswith(".mp3"):
+                    audio_file = file
+                else:
+                    video_file = file
+                    audio_file = f"audio_{file_number}.mp3"
 
-                # Close the video and audio clips after using them
-                video.close()
-                audio.close()
-                
+                    # Extract audio using moviepy
+                    video = VideoFileClip(video_file)
+                    audio = video.audio
+                    audio.write_audiofile(audio_file)
+
+                    # Close the video and audio clips after using them
+                    video.close()
+                    audio.close()
+
                 transcriber = Transcriber(st.session_state["api_key"])
 
                 transcription = transcriber.transcribe(audio_file, custom_terms)
@@ -100,7 +105,8 @@ def main():
 
                 col1, col2 = st.columns(2)
                 with col1:
-                    st.video(video_file)
+                    if uploaded_file.name.endswith(".mp4"):
+                        st.video(video_file)
                 
                 with col2:
                     with st.container():
@@ -109,7 +115,7 @@ def main():
             except Exception as e:
                 st.error(f"An error occurred: {e}")
             
-            files_to_remove = [video_file, audio_file, transcript_file, uploaded_file.name]
+            files_to_remove = [file, audio_file, transcript_file, uploaded_file.name]
 
             for file in files_to_remove:
                 if os.path.exists(file):
