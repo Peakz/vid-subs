@@ -43,7 +43,7 @@ def main():
     elif faq == 'What file formats are supported?':
         st.sidebar.info('Currently, only supporting mp3 and mp4 formats.')
     elif faq == 'How to get OpenAI API key?':
-        st.sidebar.info('You can get your OpenAI API key from the OpenAI website after creating an account.')
+        st.sidebar.info('You can get your OpenAI API key from the OpenAI website after creating an account. https://openai.com/')
     elif faq == 'What are custom terms?':
         st.sidebar.info('Custom terms are words you want to be emphasized in the transcription. They may or may not improve the output')
     elif faq == 'What do I do with the output?':
