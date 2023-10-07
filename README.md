@@ -7,6 +7,7 @@ This is a work in progress to help creators lower their costs to produce accessi
 ## Requirements
 
 - Python 3.10
+- OpenAI API key -> https://platform.openai.com/ to create an account and set up your own API key.
 
 ## Features
 
