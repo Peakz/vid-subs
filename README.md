@@ -2,6 +2,8 @@
 
 This is a Streamlit application that transcribes audio or video files using the OpenAI Whisper API. The application allows users to upload files, enter their API key, and specify custom words to be emphasized in the transcription.
 
+It's a work in progress that will be improved with time as a side project. The goal of the application is to lower the barrier of entry to accessible videos for content creators.
+
 ## Requirements
 
 - Python 3.10
